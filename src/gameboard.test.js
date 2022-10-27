@@ -25,3 +25,32 @@ test('does not add ships to invalid coordinats', () => {
 
   expect(gameboard.cells.get('8-8').ship).toBeNull();
 });
+
+test('receives attack', () => {
+  const gameboard = new Gameboard(10);
+  gameboard.addShip(4, `2-2`, 'horizontal');
+
+  gameboard.receiveAttack('2-2');
+  gameboard.receiveAttack('2-3');
+  gameboard.receiveAttack('2-4');
+
+  expect(gameboard.getShip('2-2').hits).toBe(3);
+  expect(gameboard.getShip('2-2').isSunk()).toBe(false);
+
+  gameboard.receiveAttack('2-5');
+
+  expect(gameboard.getShip('2-2').hits).toBe(4);
+  expect(gameboard.getShip('2-2').isSunk()).toBe(true);
+});
+
+test('records missed shots', () => {
+  const gameboard = new Gameboard(10);
+  gameboard.addShip(4, `2-2`, 'horizontal');
+
+  gameboard.receiveAttack('2-2');
+
+  gameboard.receiveAttack('3-3');
+  gameboard.receiveAttack('3-4');
+
+  expect(gameboard.missedShots).toEqual(['3-3', '3-4']);
+});

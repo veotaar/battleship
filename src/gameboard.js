@@ -4,6 +4,8 @@ export default class Gameboard {
   constructor(length) {
     this.length = length;
     this.cells = this.buildBoard();
+    this.ships = [];
+    this.missedShots = [];
   }
 
   buildBoard() {
@@ -44,7 +46,7 @@ export default class Gameboard {
 
     return {
       cellsToCover,
-      valid: cellsToCover.every((key) => this.cells.has(key) && this.getShip(key) === null),
+      valid: cellsToCover.every((key) => this.cells.has(key) && this.cells.get(key).ship === null),
     };
   }
 
@@ -53,17 +55,19 @@ export default class Gameboard {
     if (!valid) return;
 
     const shipToAdd = new Ship(length);
+    this.ships.push(shipToAdd);
     cellsToCover.forEach((cell) => {
-      this.cells.set(cell, {
-        ship: shipToAdd,
-        isHit: false,
-      });
+      this.cells.get(cell).ship = shipToAdd;
     });
   }
+
+  receiveAttack(coords) {
+    const cell = this.cells.get(coords);
+    if (cell.ship === null) {
+      cell.isHit = true;
+      this.missedShots.push(coords);
+    } else {
+      cell.ship.hit();
+    }
+  }
 }
-
-// const gameboard = new Gameboard(10);
-
-// gameboard.addShip(2, '0-0', 'horizontal');
-
-// console.log(gameboard.cells);
