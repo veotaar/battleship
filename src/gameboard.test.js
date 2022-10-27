@@ -54,3 +54,20 @@ test('records missed shots', () => {
 
   expect(gameboard.missedShots).toEqual(['3-3', '3-4']);
 });
+
+test('reports if all of its ships are sunk or not', () => {
+  const gameboard = new Gameboard(10);
+  gameboard.addShip(4, '2-2', 'horizontal');
+  gameboard.addShip(3, '4-2', 'vertical');
+
+  gameboard.receiveAttack('2-2');
+  gameboard.receiveAttack('2-3');
+  gameboard.receiveAttack('2-4');
+  gameboard.receiveAttack('2-5');
+  expect(gameboard.isAllShipsSunk()).toBe(false);
+
+  gameboard.receiveAttack('4-2');
+  gameboard.receiveAttack('5-2');
+  gameboard.receiveAttack('6-2');
+  expect(gameboard.isAllShipsSunk()).toBe(true);
+});

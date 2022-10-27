@@ -70,4 +70,8 @@ export default class Gameboard {
       cell.ship.hit();
     }
   }
+
+  isAllShipsSunk() {
+    return this.ships.every((ship) => ship.isSunk());
+  }
 }
