@@ -1,0 +1,40 @@
+.title {
+  text-align: center;
+  max-width: 100%;
+}
+
+.battlefield {
+  display: flex;
+  flex-direction: column;
+  max-width: 80%;
+  margin-inline: auto;
+  gap: var(--size-3);
+  padding: var(--size-3);
+}
+
+@media only screen and (min-width: 1300px) {
+  .battlefield {
+    flex-direction: row;
+  }
+}
+
+.field {
+  flex: 1;
+}
+
+.ship-grid {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  margin-block-start: var(--size-3);
+  border: 1px solid var(--gray-7);
+}
+
+.cell {
+  border: 1px solid var(--gray-7);
+  aspect-ratio: var(--ratio-square);
+}
+
+.cell:hover {
+  background-color: var(--gray-8);
+  cursor: crosshair;
+}
