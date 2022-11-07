@@ -7,6 +7,32 @@
     <title>Battleship</title>
   <script defer src="main.js"></script></head>
   <body>
-    <h1>Battleship</h1>
+    <h1 class="title">Battleship</h1>
+
+    <section class="ship-placement" data-ship-placement>
+      <p>Place your ships</p>
+      <p class="placement-message" data-placement-message>Place your carrier</p>
+      <button class="btn-rotate" data-btn-rotate>Rotate</button>
+      <div class="placement-grid" data-placement-grid></div>
+    </section>
+
+    <main class="battlefield hidden" data-battlefield>
+      <div class="field" data-field="player">
+        <h2>You</h2>
+        <div class="ship-grid" data-ship-grid></div>
+      </div>
+      <div class="field" data-field="computer">
+        <h2>Enemy</h2>
+
+        <div class="ship-grid" data-ship-grid></div>
+      </div>
+    </main>
+
+    <section class="game-over hidden" data-game-over>
+      <div class="game-over-container">
+        <h2 class="game-result won" data-game-result>Result!</h2>
+        <button class="btn-again" data-btn-again>Play Again</button>
+      </div>
+    </section>
   </body>
 </html>
