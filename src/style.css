@@ -1,3 +1,7 @@
+body {
+  position: relative;
+}
+
 .title {
   text-align: center;
   max-width: 100%;
@@ -12,7 +16,7 @@
   padding: var(--size-3);
 }
 
-@media only screen and (min-width: 1300px) {
+@media only screen and (min-width: 980px) {
   .battlefield {
     flex-direction: row;
   }
@@ -26,15 +30,93 @@
   display: grid;
   grid-template-columns: repeat(10, 1fr);
   margin-block-start: var(--size-3);
-  border: 1px solid var(--gray-7);
 }
 
 .cell {
   border: 1px solid var(--gray-7);
   aspect-ratio: var(--ratio-square);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.cell:hover {
+[data-field="computer"] .cell:hover {
   background-color: var(--gray-8);
   cursor: crosshair;
+}
+
+.ship {
+  background-color: var(--gray-5);
+  border-color: var(--gray-5);
+}
+
+.ship:has(.bullet) {
+  background-color: var(--red-5);
+  border-color: var(--red-5);
+}
+
+.bullet {
+  width: 35%;
+  height: 35%;
+  background-color: var(--gray-5);
+  border-radius: var(--radius-3);
+}
+
+.ship .bullet {
+  background-color: var(--red-9);
+}
+
+.bullet.hit {
+  background-color: var(--red-9);
+}
+
+/* Game Over Page */
+.game-over {
+  background-color: var(--gray-9);
+
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.game-over-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: var(--size-3);
+}
+
+.game-result {
+  font-size: var(--font-size-fluid-3);
+}
+
+.game-result.won {
+  color: var(--yellow-4);
+}
+
+.game-result.lost {
+  color: var(--red-6);
+}
+
+.btn-again {
+  padding: var(--size-2) var(--size-3);
+  background-color: var(--teal-9);
+  color: var(--teal-0);
+}
+
+.btn-again:hover {
+  background-color: var(--teal-8);
+}
+
+.hidden {
+  visibility: hidden;
+  opacity: 0;
 }
