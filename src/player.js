@@ -14,6 +14,7 @@ export default class Player {
   constructor() {
     this.board = new Gameboard(10);
     this.opponent = null;
+    this.turn = false;
   }
 
   setOpponent(opponent) {
@@ -21,16 +22,19 @@ export default class Player {
   }
 
   attack(coords) {
-    this.#possibleMoves.splice(
-      this.#possibleMoves.findIndex((el) => el === coords),
-      1
-    );
     this.opponent.board.receiveAttack(coords);
+    this.endTurn();
+  }
+
+  endTurn() {
+    this.turn = false;
+    this.opponent.turn = true;
   }
 
   randomAttack() {
+    if (this.#possibleMoves.length === 0) return;
     const randIndex = Math.floor(Math.random() * this.#possibleMoves.length);
     const randAttackCoords = this.#possibleMoves.splice(randIndex, 1);
-    this.attack(randAttackCoords);
+    this.attack(randAttackCoords[0]);
   }
 }
