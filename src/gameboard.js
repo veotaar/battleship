@@ -6,6 +6,8 @@ export default class Gameboard {
     this.cells = this.buildBoard();
     this.ships = [];
     this.missedShots = [];
+    this.occupiedCells = [];
+    this.receivedHits = [];
   }
 
   buildBoard() {
@@ -57,17 +59,19 @@ export default class Gameboard {
     const shipToAdd = new Ship(length);
     this.ships.push(shipToAdd);
     cellsToCover.forEach((cell) => {
+      this.occupiedCells.push(cell);
       this.cells.get(cell).ship = shipToAdd;
     });
   }
 
   receiveAttack(coords) {
     const cell = this.cells.get(coords);
+    cell.isHit = true;
     if (cell.ship === null) {
-      cell.isHit = true;
       this.missedShots.push(coords);
     } else {
       cell.ship.hit();
+      this.receivedHits.push(coords);
     }
   }
 

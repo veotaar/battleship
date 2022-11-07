@@ -3,6 +3,9 @@ const grids = document.querySelectorAll('[data-ship-grid]');
 export const playerCells = document.querySelectorAll('[data-field="player"] [data-position]');
 export const enemyCells = document.querySelectorAll('[data-field="computer"] [data-position]');
 export const enemyGrid = document.querySelector('[data-field="computer"] [data-ship-grid]');
+export const gameOverScreen = document.querySelector('[data-game-over]');
+export const gameOverMessage = document.querySelector('[data-game-result]');
+export const btnPlayAgain = document.querySelector('[data-btn-again]');
 
 // build grids
 const gridCell = function (row, column) {
