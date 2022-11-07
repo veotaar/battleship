@@ -54,7 +54,7 @@ export default class Gameboard {
 
   addShip(length, coords, orientation) {
     const { cellsToCover, valid } = this.shipCanBeAdded(length, coords, orientation);
-    if (!valid) return;
+    if (!valid) return false;
 
     const shipToAdd = new Ship(length);
     this.ships.push(shipToAdd);
@@ -62,6 +62,7 @@ export default class Gameboard {
       this.occupiedCells.push(cell);
       this.cells.get(cell).ship = shipToAdd;
     });
+    return true;
   }
 
   receiveAttack(coords) {

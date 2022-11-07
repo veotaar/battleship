@@ -1,12 +1,19 @@
 import Player from './player.js';
 import {
+  placementGrid,
+  btnRotate,
+  placementCells,
+  highlightShip,
   playerCells,
   enemyCells,
   enemyGrid,
   drawShips,
+  drawShipsOnPlacementGrid,
   drawMissed,
   drawHits,
   gameOverScreen,
+  placementScreen,
+  battlefieldScreen,
   gameOverMessage,
   btnPlayAgain,
 } from './dom.js';
@@ -17,13 +24,60 @@ const enemy = new Player();
 player.setOpponent(enemy);
 enemy.setOpponent(player);
 
-player.board.addShip(5, '1-1', 'horizontal');
-player.board.addShip(4, '3-3', 'vertical');
+const ships = [
+  {
+    shipName: 'Carrier',
+    length: 5,
+  },
+  {
+    shipName: 'Battleship',
+    length: 4,
+  },
+  {
+    shipName: 'Destroyer',
+    length: 3,
+  },
+  {
+    shipName: 'Submarine',
+    length: 3,
+  },
+  {
+    shipName: 'Patrol Boat',
+    length: 2,
+  },
+];
+let orientation = 'horizontal';
+let shipIndex = 0;
+
+// change orientation
+btnRotate.addEventListener('click', () => {
+  if (orientation === 'horizontal') orientation = 'vertical';
+  else orientation = 'horizontal';
+});
+
+// highlight possible ship placement
+placementGrid.addEventListener('mouseover', (e) => {
+  if (shipIndex >= ships.length) return;
+  highlightShip(placementCells, player.board, ships[shipIndex].length, e.target.dataset.position, orientation);
+});
+
+// add valid ship
+placementGrid.addEventListener('click', (e) => {
+  if (shipIndex >= ships.length) return;
+  const shipAdded = player.board.addShip(ships[shipIndex].length, e.target.dataset.position, orientation);
+  if (!shipAdded) return;
+  drawShipsOnPlacementGrid(placementCells, player.board);
+  shipIndex += 1;
+  if (shipIndex === ships.length) {
+    drawShips(playerCells, player.board, 'player');
+    placementScreen.classList.add('hidden');
+    battlefieldScreen.classList.remove('hidden');
+  }
+});
 
 enemy.board.addShip(5, '8-4', 'horizontal');
 enemy.board.addShip(4, '2-6', 'vertical');
 
-drawShips(playerCells, player.board, 'player');
 // drawShips(enemyCells, enemy.board, 'computer');
 
 const showGameOver = function () {
