@@ -9,8 +9,20 @@ body {
 
 .ship-placement {
   text-align: center;
-  max-width: 50%;
+  width: var(--size-14);
   margin-inline: auto;
+}
+
+@media only screen and (min-width: 500px) {
+  .ship-placement {
+    width: var(--size-15);
+  }
+}
+
+.place-message {
+  margin-top: var(--size-5);
+  margin-bottom: var(--size-5);
+  max-inline-size: none;
 }
 
 .battlefield {
@@ -20,6 +32,10 @@ body {
   margin-inline: auto;
   gap: var(--size-3);
   padding: var(--size-3);
+}
+
+.battlefield h3 {
+  text-align: center;
 }
 
 @media only screen and (min-width: 980px) {
@@ -118,12 +134,14 @@ body {
   color: var(--red-6);
 }
 
+.btn-rotate,
 .btn-again {
   padding: var(--size-2) var(--size-3);
   background-color: var(--teal-9);
   color: var(--teal-0);
 }
 
+.btn-rotate:hover,
 .btn-again:hover {
   background-color: var(--teal-8);
 }
