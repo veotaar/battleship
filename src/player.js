@@ -14,7 +14,6 @@ export default class Player {
   constructor() {
     this.board = new Gameboard(10);
     this.opponent = null;
-    this.turn = false;
   }
 
   setOpponent(opponent) {
@@ -23,12 +22,6 @@ export default class Player {
 
   attack(coords) {
     this.opponent.board.receiveAttack(coords);
-    this.endTurn();
-  }
-
-  endTurn() {
-    this.turn = false;
-    this.opponent.turn = true;
   }
 
   randomAttack() {
