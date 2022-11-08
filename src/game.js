@@ -75,10 +75,7 @@ placementGrid.addEventListener('click', (e) => {
   }
 });
 
-enemy.board.addShip(5, '8-4', 'horizontal');
-enemy.board.addShip(4, '2-6', 'vertical');
-
-// drawShips(enemyCells, enemy.board, 'computer');
+enemy.board.addRandomShips([5, 4, 3, 3, 2]);
 
 const showGameOver = function () {
   gameOverMessage.classList.remove('won', 'lost');
