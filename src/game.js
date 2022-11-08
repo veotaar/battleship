@@ -5,7 +5,6 @@ import {
   placementCells,
   highlightShip,
   playerCells,
-  enemyCells,
   enemyGrid,
   drawShips,
   drawShipsOnPlacementGrid,
@@ -16,6 +15,7 @@ import {
   battlefieldScreen,
   gameOverMessage,
   btnPlayAgain,
+  cleanBoards,
 } from './dom.js';
 
 const player = new Player();
@@ -104,4 +104,23 @@ enemyGrid.addEventListener('click', (e) => {
   drawHits(player.board, 'player');
   drawMissed(player.board, 'player');
   showGameOver();
+});
+
+const resetGame = function () {
+  player.board.clearBoard();
+  enemy.board.clearBoard();
+  player.resetPossibleMoves();
+  enemy.resetPossibleMoves();
+  shipIndex = 0;
+};
+
+btnPlayAgain.addEventListener('click', () => {
+  resetGame();
+  cleanBoards();
+
+  gameOverScreen.classList.add('hidden');
+  battlefieldScreen.classList.add('hidden');
+  placementScreen.classList.remove('hidden');
+
+  enemy.board.addRandomShips([5, 4, 3, 3, 2]);
 });

@@ -56,7 +56,7 @@ export const highlightShip = function (DOMCells, board, length, coords, orientat
 };
 
 export const drawShipsOnPlacementGrid = function (DOMCells, board) {
-  DOMCells.forEach((cell) => cell.classList.remove('ship-highlight'));
+  DOMCells.forEach((cell) => cell.classList.remove('ship'));
   board.occupiedCells.forEach((cell) => {
     document.querySelector(`[data-placement-grid] [data-position="${cell}"]`).classList.add('ship');
   });
@@ -74,4 +74,21 @@ export const drawHits = function (board, player) {
   board.receivedHits.forEach((coord) => {
     document.querySelector(`[data-field=${player}] [data-bullet="${coord}"]`).classList.add('bullet', 'hit');
   });
+};
+
+export const cleanBoards = function () {
+  document.querySelectorAll(`[data-field="player"] [data-bullet]`).forEach((node) => node.classList.remove('bullet'));
+  document.querySelectorAll(`[data-field="computer"] [data-bullet]`).forEach((node) => node.classList.remove('bullet'));
+  placementCells.forEach((cell) => cell.classList.remove('ship'));
+  document.querySelectorAll('[data-ship-grid] [data-position]').forEach((cell) => cell.classList.remove('ship'));
+
+  document
+    .querySelectorAll(`[data-field="player"] [data-bullet]`)
+    .forEach((node) => node.classList.remove('bullet', 'hit'));
+
+  document
+    .querySelectorAll(`[data-field="computer"] [data-bullet]`)
+    .forEach((node) => node.classList.remove('bullet', 'hit'));
+
+  playerCells.forEach((cell) => cell.classList.remove('ship'));
 };

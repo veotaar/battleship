@@ -125,4 +125,12 @@ export default class Gameboard {
   isAllShipsSunk() {
     return this.ships.every((ship) => ship.isSunk());
   }
+
+  clearBoard() {
+    this.cells = this.buildBoard();
+    this.ships = [];
+    this.missedShots = [];
+    this.occupiedCells = [];
+    this.receivedHits = [];
+  }
 }

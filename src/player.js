@@ -37,4 +37,16 @@ export default class Player {
     const randAttackCoords = this.#possibleMoves.splice(randIndex, 1);
     this.attack(randAttackCoords[0]);
   }
+
+  resetPossibleMoves() {
+    this.#possibleMoves = (() => {
+      const arr = [];
+      for (let i = 0; i < 10; i += 1) {
+        for (let j = 0; j < 10; j += 1) {
+          arr.push(`${i}-${j}`);
+        }
+      }
+      return arr;
+    })();
+  }
 }
